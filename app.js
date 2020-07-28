@@ -59,32 +59,33 @@ function getTasks() {
 function addTask(e){
   if(taskInput.value === ''){
     alert('Add Task')
+  }else{
+    //Adding A li dynamically
+    const li = document.createElement('li');
+    li.className = 'collection-item';
+    li.appendChild(document.createTextNode(taskInput.value));
+    
+    //Creating a New Link
+    const link = document.createElement('a');
+    link.className = 'delete-item secondary-content';
+    link.innerHTML = '<i class = "fa fa-remove"></i>'
+    
+    //Appending link to li
+    li.appendChild(link);
+    
+    //Append li to ul
+    tasklist.appendChild(li);
+
+    //Store in local storage
+
+    storeTaskInLocalStorage(taskInput.value);
+    
+    //Clearing the value after submission
+    taskInput.value = '';
+
+    //Preventing default propety of the target
+    e.preventDefault();
   }
-  //Adding A li dynamically
-  const li = document.createElement('li');
-  li.className = 'collection-item';
-  li.appendChild(document.createTextNode(taskInput.value));
-  
-  //Creating a New Link
-  const link = document.createElement('a');
-  link.className = 'delete-item secondary-content';
-  link.innerHTML = '<i class = "fa fa-remove"></i>'
-  
-  //Appending link to li
-  li.appendChild(link);
-  
-  //Append li to ul
-  tasklist.appendChild(li);
-
-  //Store in local storage
-
-  storeTaskInLocalStorage(taskInput.value);
-  
-  //Clearing the value after submission
-  taskInput.value = '';
-
-  //Preventing default propety of the target
-  e.preventDefault();
 } 
 //Store Task
 function storeTaskInLocalStorage(task){
